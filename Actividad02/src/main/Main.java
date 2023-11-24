@@ -17,15 +17,28 @@ public class Main {
         listado.add("NUeVE");
         listado.add("diez");
         System.out.println("***LISTA***");
-        for (String item: listado){
-            System.out.print(item + " ");
-        }
-        Transformador lista = new Transformador(listado);
-        List<String> resultado = lista.Transformar();
-        System.out.println("");
-        System.out.println("***LISTA TRANSFORMADA***");
-        for (String item: resultado){
-            System.out.print(item + " ");
-        }
+        System.out.println(listado);
+        System.out.println("***LISTA EN MAYUSCULA***");
+        System.out.println(transformarLista(listado,(ls -> {
+        	List<String> respuesta = new ArrayList<>();
+        	for(String str: ls) {
+        		respuesta.add(str.toUpperCase());
+        	}
+        	return respuesta;
+        })));
+        System.out.println("***lista en minuscula***");
+        System.out.println(transformarLista(listado,(ls -> {
+        	List<String> respuesta = new ArrayList<>();
+        	for(String str: ls) {
+        		respuesta.add(str.toLowerCase());
+        	}
+        	return respuesta;
+        })));
     }
+	
+	public static List<String> transformarLista(List<String> lista, Transformador t) {
+		return t.accion(lista);
+	}
+	
+	
 }
