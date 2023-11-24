@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
 	public static void main(String[] args) {
@@ -17,18 +18,20 @@ public class Main {
         listado.add("NUeVE");
         listado.add("diez");
         System.out.println("***LISTA***");
-        for (String item: listado){
-            System.out.print(item + " ");
-        }
-        Transformador lista = new Transformador(listado);
-        List<String> resultado = lista.Transformar();
-        System.out.println("");
+        System.out.println(listado);
         System.out.println("***LISTA EN MAYUSCULA***");
-        for (String item: resultado){
-            System.out.print(item + " ");
-        }
-        System.out.println("");
-        System.out.println("***LISTA EN CONCATENAR***");
-        System.out.println(lista.concatenarPalabrasDeNCaracteres(4));
+        System.out.println(listaToUpperCase(listado));
+        System.out.println("***LISTA FILTRADA (3)***");
+        System.out.println(filtrarByCantCaracteres(listado,3));
+        System.out.println("***LISTA FILTRADA (4)***");
+        System.out.println(filtrarByCantCaracteres(listado,4));
     }
+	
+	public static List<String> listaToUpperCase(List<String> lista) {
+		return lista.stream().map(str -> str.toUpperCase()).collect(Collectors.toList());
+	}
+	
+	public static String filtrarByCantCaracteres(List<String> lista, Integer cantidad) {
+		return String.join(", ", lista.stream().filter(str -> str.length() > cantidad).collect(Collectors.toList()));
+	}
 }
